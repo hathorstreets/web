@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>Hathor Streets</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css?version=36" />
+	<link rel="stylesheet" href="assets/css/snackbar.css?version=3" />
+
+	<script src="javascripts/jquery-3.6.0.min.js"></script>
+	<script src="javascripts/static.js"></script>
+	<script src="javascripts/main.js?version=1"></script>
+	<script src="javascripts/qrcode.min.js"></script>
+
+	<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+<body class="no-sidebar is-preload">
+<div id="snackbar"></div>
+<div id="page-wrapper">
+	<div id="header-wrapper">
+		<a id="logo" href="index.html">
+			<img src="images/logo_small.png" width="74" height="74" alt="Home">
+			<span id="title">HATHOR STREETS</span>
+		</a>
+		<div id="header" class="container">
+			<nav id="nav" style="text-align: right;">
+				<ul style="margin-right: 20px;">
+					<li><a href="cities.html">Cities</a></li>
+					<li><a target="_blank" href="images/rarity_table.jpg">Rarity Table</a></li>
+					<li><a href="explorer.html">Explorer</a></li>
+					<li><a target="_blank" href="builder.html">Builder</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+
+	<div class="Cover">
+		<div class="sliding-background"></div>
+	</div>
+
+	<div class="wrapper" style="padding: 0 0 6em 0; flex: 1;">
+		<div class="container" style="width: 1200px; padding: 2em; margin-bottom: 2em;">
+			<section class="col-6 col-12-narrower" style="margin: auto;">
+				<div class="row gtr-50">
+					<div class="col-5 col-12-mobile">
+						<span id="about"><b>Hathor Streets</b> is a collection of 11 111 original NFT pieces that was created as an honor to all Hathor related projects and people.
+							Each piece consist of 7 randomly generated parts, where some are rarer than others.
+							Will you get the rarest one?</span>
+					</div>
+					<div class="col-7 col-12-mobile">
+						<img src="images/street.png" style="width: 100%;" alt="Street">
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<div class="Divider"></div>
+
+		<div class="container card BuyCard" id="main" style="width: 800px; padding: 2em;">
+			<section class="col-6 col-12-narrower SuspendedSection" style="margin-bottom: 0;">
+				<h1 style="font-size: 20pt; margin-bottom: 1em;">Sale is now suspended. Try again later, please!</h1>
+			</section>
+			<section class="col-6 col-12-narrower BuySection" style="margin-bottom: 0;">
+				<h1 style="font-size: 20pt; margin-bottom: 1em;">Buy one for 50 $HTR</h1>
+				<form>
+					<div class="row gtr-50">
+						<div class="col-10 col-12-mobile" style="text-align: left;">
+							<span class="label">Your HTR address:</span>
+						</div>
+						<div class="col-2 col-12-mobile" id="count_big_screen" style="text-align: left;">
+							<span class="label">Count:</span>
+						</div>
+					</div>
+					<div class="row gtr-50">
+						<div class="col-10 col-12-mobile">
+							<input name="address" id="address" type="text" />
+						</div>
+						<div class="col-2 col-12-mobile" id="count_small_screen" style="text-align: left;">
+							<span class="label">Count:</span>
+						</div>
+						<div class="col-2 col-12-mobile">
+							<input name="count" id="count" value="1" min="1" max="10" type="number" />
+						</div>
+						<div class="col-12">
+							<ul class="actions" style="text-align: right;">
+								<li><input type="button" value="Buy" id="mint" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</section>
+			<div id="sold_counter"></div>
+			<div id="warning_address" class="BuySection">Use address only from the official Hathor Wallet! Never use address from an exchange!</div>
+		</div>
+
+		<div class="Divider" style="margin-top: 6em; margin-bottom: 3em;"></div>
+
+		<div class="container">
+			<section class="col-6 col-12-narrower" style="margin: auto;">
+				<div class="row gtr-50" style="margin-bottom: 3em; text-align: center;">
+					<div class="col-12 col-12-mobile">
+						<h1 style="font-size: 30pt;">Team</h1>
+					</div>
+				</div>
+				<div class="row gtr-50">
+					<div class="col-6 col-12-mobile" style="text-align: center; margin-bottom: 1em;">
+						<img src="images/pidgeon.jpg" class="TeamPhoto">
+						<li style="list-style: none;" class="icon brands fa-twitter"><a style="margin-left: 10px;" target="_blank" href="https://twitter.com/maros2710">ⓗathor.maros</a></li>
+					</div>
+					<div class="col-6 col-12-mobile" style="text-align: center;">
+						<img src="images/giraffe.png" class="TeamPhoto">
+						<li style="list-style: none;" class="icon brands fa-twitter"><a style="margin-left: 10px;" target="_blank" href="https://twitter.com/FractalGiraffe">Fractal Giraffe</a></li>
+					</div>
+				</div>
+			</section>
+		</div>
+
+	</div>
+
+	<!-- Footer -->
+	<div id="footer-wrapper">
+		<div id="footer" class="container" style="width: 600px;">
+			<div class="row" style="margin-left: 0;">
+
+				<section class="col-6 col-12-narrower" style="margin: auto; text-align: center; padding: 0;">
+					<div class="row gtr-0">
+						<ul class="divided icons col-6 col-12-mobile">
+							<li class="icon brands fa-twitter"><a target="_blank" href="https://twitter.com/HathorStreets">Twitter</a></li>
+						</ul>
+						<ul class="divided icons col-6 col-12-mobile">
+							<li class="icon brands fa-telegram"><a target="_blank" href="https://t.me/hathorstreets">Telegram</a></li>
+						</ul>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div id="copyright" class="container">
+			<ul class="menu">
+				<li>&copy; Hathor Streets. All rights reserved.</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

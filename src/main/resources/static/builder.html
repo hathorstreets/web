@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hathor Streets Builder</title>
+    <link rel="stylesheet" href="assets/css/builder.css?version=63">
+    <link rel="stylesheet" href="assets/css/main.css?version=3">
+    <link rel="stylesheet" href="assets/css/snackbar.css?version=5" />
+    <link rel="stylesheet" href="assets/css/loader.css?version=3">
+
+    <script src="javascripts/jquery-3.6.0.min.js"></script>
+    <script src="javascripts/interact.min.js"></script>
+    <script src="javascripts/builder.js?version=1"></script>
+    <script src="javascripts/static.js"></script>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <script src="javascripts/bootstrap.min.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+</head>
+<body>
+    <div id="builder_city_name_wrapper" style="display: none">
+        <div id="builder_city_name_border">
+            <div id="builder_city_name"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="builderModal" role="dialog">
+        <div class="modal-dialog" style="width: 515px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Welcome to Hathor Streets Builder!</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        After you build your city, you can save it with <i>Save</i> button in the toolbar.<br/>
+                        When your city is saved, you can bookmark this page and edit your city later.<br/>
+                        <span style="color: #cd1f1d;">Never share this link with anyone!</span> When you want to share, use <i>Copy public link</i> instead.
+                    </p>
+                    <div class="Checkbox">
+                        <input type="checkbox" value="" id="builder_dont_show_modal">
+                        <label for="builder_dont_show_modal">
+                            Don't show again
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="builder_save_modal" role="dialog" style="z-index: 999999 !important;">
+        <div class="modal-dialog" style="width: 515px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Name of your city (Optional)</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input type="text" value="" id="builder_modal_city_name">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="builder_modal_save" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="loader_bg" class="Hidden"></div>
+    <div id="loader" class="Hidden">Loading<span></span></div>
+    <div id="snackbar"></div>
+
+    <form id="builder_tool_bar" style="position: absolute;">
+        <input type="text" name="builder_search_input" id="builder_search_input" placeholder="Search by street numbers or addresses separated by comma..." />
+        <input type="button" value="Search" id="builder_search"/>
+        <input type="button" class="Tool" value="Save" id="save_button">
+        <input type="button" class="Tool Hidden" value="Copy public link" id="copy_public_link">
+        <input type="button" class="Tool" value="Reset" id="start_over">
+    </form>
+</body>
+</html>
