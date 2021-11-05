@@ -1,6 +1,9 @@
 $( document ).ready(function() {
 
     let citiesDiv = $('#cities');
+    let cityTableBody = $('#city_table_body');
+    let table = undefined;
+    let cityList = [];
 
     showLoader();
 
@@ -8,15 +11,53 @@ $( document ).ready(function() {
         url: '/cities',
         type: 'GET',
         success: function (cities) {
+            cityList = cities;
             var j = 1;
             for(i in cities) {
                 let city = cities[i];
                 let row = $('<div class="col-12 col-12-mobile">');
                 let name = city.name ? city.name : "No Name";
-                row.append('<a href="builder.html?shareId=' + city.shareId + '" target="_blank">' + j + '. ' + name + "</a>");
-                citiesDiv.append(row);
+
+                let tr = $('<tr>');
+                let idTd = $('<td>');
+                let nameTd = $('<td>');
+                let noOfTilesTd = $('<td>');
+
+                idTd.html(city.order);
+                nameTd.html(name);
+                noOfTilesTd.html(city.tiles);
+
+                tr.append(idTd);
+                tr.append(nameTd);
+                tr.append(noOfTilesTd);
+
+                cityTableBody.append(tr);
+                //
+                // row.append('<a href="builder.html?shareId=' + city.shareId + '" target="_blank">' + j + '. ' + name + "</a>");
+                // citiesDiv.append(row);
                 j++;
             }
+            $.noConflict();
+            table = $('#city_table').DataTable({
+                "paging":   false,
+                "info":     false,
+                language: {
+                    search: "",
+                    searchPlaceholder: "Search..."
+                }
+            });
+
+            $('#city_table tbody').on('click', 'tr', function () {
+                let data = table.row( this ).data();
+                for(let i in cityList) {
+                    let c = cityList[i];
+                    if (c.order === parseInt(data[0])) {
+                        window.open('builder.html?shareId=' + c.shareId, '_blank').focus();
+                        break;
+                    }
+                }
+            });
+
             hideLoader();
         },
         error: function (error) {

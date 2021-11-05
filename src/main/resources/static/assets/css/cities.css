@@ -1,0 +1,16 @@
+.odd {
+    background-color: #EEE !important;
+}
+
+#city_table_wrapper {
+    width: 100%
+}
+
+#city_table tr {
+    cursor: pointer;
+}
+
+#city_table tr:hover td {
+    background-color: rgb(217, 195, 250);
+    color: white;
+}

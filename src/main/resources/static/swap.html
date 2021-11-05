@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>Hathor Streets Safe Swap</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css?version=7" />
+    <link rel="stylesheet" href="assets/css/swap.css?version=5" />
+    <link rel="stylesheet" href="assets/css/snackbar.css?version=3" />
+
+    <script src="javascripts/jquery-3.6.0.min.js"></script>
+    <script src="javascripts/static.js"></script>
+    <script src="javascripts/swap.js"></script>
+    <script src="javascripts/qrcode.min.js"></script>
+
+    <link rel="stylesheet" href="assets/css/bootstrap-tagsinput.css" />
+    <script src="javascripts/bootstrap-tagsinput.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+</head>
+<body class="no-sidebar is-preload">
+<div id="snackbar"></div>
+<div id="page-wrapper">
+    <div id="header-wrapper">
+        <a id="logo" href="index.html">
+            <img src="images/logo_small.png" width="74" height="74" alt="Home">
+            <span id="title">HATHOR STREETS</span>
+        </a>
+        <div id="header" class="container">
+            <nav id="nav" style="text-align: right;">
+                <ul style="margin-right: 20px;">
+                    <li><a href="cities.html">Cities</a></li>
+                    <li><a target="_blank" href="images/rarity_table.jpg">Rarity Table</a></li>
+                    <li><a target="_blank" href="explorer.html">Explorer</a></li>
+                    <li><a href="builder.html">Builder</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="wrapper" style="flex: 1; padding: 1em 0 1em 0;">
+        <div class="container" id="main" style="width: 800px; padding: 2em;">
+            <section class="col-6 col-12-narrower" style="margin-bottom: 0;">
+                <h1 style="font-size: 20pt; margin-bottom: 1em;">Create Swap</h1>
+                <div class="row gtr-50">
+                    <div class="col-12 col-12-mobile" style="padding-left: 0;">
+                        <form>
+                            <input name="address" id="address" type="text" placeholder="Your HTR address"/>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="wrapper" style="flex: 1; padding: 1em 0 1em 0;">
+        <div class="container" style="width: 800px; padding: 2em;">
+            <section class="col-6 col-12-narrower" style="margin-bottom: 0;">
+                <div class="row gtr-50" style="margin-bottom: 60px;">
+                    <div class="SwapCard col-12 col-12-mobile">
+                        <h1 style="font-size: 20pt; margin-bottom: 1em;">I am offering:</h1>
+                        <form>
+                            <input id="offer_hathor" type="text" placeholder="Hathor amount" style="margin-bottom: 10px;"/>
+                            <div style="display: flex;">
+                                <input name="offer_tokens" id="offer_tokens" type="text" placeholder="Token UID" minlength="64" maxlength="64"/>
+                                <input type="button" value="Add" class="AddToken" id="add_offer_token"/>
+                            </div>
+                        </form>
+                        <div id="offer_tokens_tags" class="Tags"></div>
+                    </div>
+                </div>
+
+                <div class="row gtr-50">
+                    <div class="SwapCard col-12 col-12-mobile">
+                        <h1 style="font-size: 20pt; margin-bottom: 1em;">I want to get:</h1>
+                        <form>
+                            <input id="demand_hathor" type="text" placeholder="Hathor amount" style="margin-bottom: 10px;"/>
+                            <div style="display: flex;">
+                                <input name="demand_tokens" id="demand_tokens" type="text" placeholder="Token UID" minlength="64" maxlength="64"/>
+                                <input type="button" value="Add" class="AddToken" id="add_demand_token"/>
+                            </div>
+                        </form>
+                        <div id="demand_tokens_tags" class="Tags"></div>
+                    </div>
+                </div>
+
+                <div class="row gtr-50">
+                    <div class="col-12">
+                        <ul class="actions" style="text-align: right;">
+                            <li><input type="button" value="Create" id="swap"/></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-wrapper">
+        <div id="footer" class="container" style="width: 600px;">
+            <div class="row" style="margin-left: 0;">
+
+                <section class="col-6 col-12-narrower" style="margin: auto; text-align: center; padding: 0;">
+                    <div class="row gtr-0">
+                        <ul class="divided icons col-6 col-12-mobile">
+                            <li class="icon brands fa-twitter"><a target="_blank" href="https://twitter.com/HathorStreets">Twitter</a></li>
+                        </ul>
+                        <ul class="divided icons col-6 col-12-mobile">
+                            <li class="icon brands fa-telegram"><a target="_blank" href="https://t.me/hathorstreets">Telegram</a></li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="copyright" class="container">
+            <ul class="menu">
+                <li>&copy; Hathor Streets. All rights reserved.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
