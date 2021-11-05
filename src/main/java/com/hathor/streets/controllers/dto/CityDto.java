@@ -5,6 +5,10 @@ import java.util.List;
 
 public class CityDto {
 
+   private int order;
+
+   private int tiles;
+
    private String id;
 
    private String shareId;
@@ -43,5 +47,21 @@ public class CityDto {
 
    public void setName(String name) {
       this.name = name;
+   }
+
+   public int getOrder() {
+      return order;
+   }
+
+   public void setOrder(int order) {
+      this.order = order;
+   }
+
+   public int getTiles() {
+      return tiles;
+   }
+
+   public void setTiles(int tiles) {
+      this.tiles = tiles;
    }
 }

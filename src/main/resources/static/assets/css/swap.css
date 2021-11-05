@@ -1,0 +1,37 @@
+.SwapCard {
+    padding: 2em !important;
+    text-align: center;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 #ccc;
+}
+
+.Tag {
+    padding: 5px;
+    border: 1px solid dodgerblue;
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.Tags {
+    margin-top: 10px;
+    text-align: left;
+    display: inline-grid;
+}
+
+.TagRemove img {
+    width: 15px;
+}
+
+.TagRemove {
+    margin-left: 15px;
+    text-decoration: none;
+    border: none;
+    margin-right: 5px;
+}
+
+.AddToken {
+    margin-left: 10px;
+}

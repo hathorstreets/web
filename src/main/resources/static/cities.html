@@ -7,13 +7,17 @@
     <link rel="stylesheet" href="assets/css/main.css?version=19" />
     <link rel="stylesheet" href="assets/css/loader.css?version=3">
     <link rel="stylesheet" href="assets/css/snackbar.css?version=3" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.min.css?version=1" />
+    <link rel="stylesheet" href="assets/css/cities.css?version=5" />
 
-    <script src="javascripts/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="javascripts/jquery-3.6.0.min.js" type="text/javascript"></script>
     <script src="javascripts/jquery/jquery-ui.min.js" type="text/javascript"></script>
     <link href="assets/css/jquery/jquery-ui.css" rel="Stylesheet" type="text/css" />
 
     <script src="javascripts/static.js"></script>
     <script src="javascripts/cities.js"></script>
+
+    <script src="javascripts/jquery.dataTables.min.js"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 </head>
@@ -42,11 +46,22 @@
     </div>
 
     <div class="wrapper" style="flex: 1; padding: 2em 0 6em 0;">
-        <div class="container" id="main">
+        <div class="container" id="main" style="width: 800px;">
             <section class="col-6 col-12-narrower" style="margin-bottom: 10px;">
                 <div class="row gtr-50" id="cities" style="text-align: center; min-height: 300px;">
                     <h1 class="col-12 col-12-mobile" style="font-size: 30pt;">Cities</h1>
+                    <table id="city_table" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>No. of tiles</th>
+                        </tr>
+                        </thead>
+                        <tbody id="city_table_body">
 
+                        </tbody>
+                    </table>
                 </div>
             </section>
         </div>

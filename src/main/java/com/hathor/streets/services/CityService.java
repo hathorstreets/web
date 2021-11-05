@@ -14,6 +14,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CityService {
@@ -85,6 +86,12 @@ public class CityService {
       for(City city : cityRepository.findAll()) {
          result.add(city);
       }
+      result = result.stream().sorted((o1, o2) -> {
+         Integer max1 = o1.getStreets().stream().map(CityStreet::getId).max(Integer::compare).get();
+         Integer max2 = o2.getStreets().stream().map(CityStreet::getId).max(Integer::compare).get();
+         return max1.compareTo(max2);
+      }).collect(Collectors.toList());
+
       return result;
    }
 }

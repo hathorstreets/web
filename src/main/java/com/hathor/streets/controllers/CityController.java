@@ -73,9 +73,12 @@ public class CityController {
    public List<CityDto> getCities() {
       List<CityDto> result = new ArrayList<>();
       List<City> cities = cityService.getCities();
+      int order = 1;
       for(City city : cities) {
          CityDto dto = DtoConverter.toDto(city, false);
+         dto.setOrder(order);
          result.add(dto);
+         order++;
       }
       return result;
    }

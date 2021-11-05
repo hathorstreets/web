@@ -96,6 +96,8 @@ public class DtoConverter {
          streetDto.setY(street.getY());
          dto.getStreets().add(streetDto);
       }
+
+      dto.setTiles(dto.getStreets().size());
       return dto;
    }
 }
