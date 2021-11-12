@@ -93,6 +93,10 @@ $( document ).ready(function() {
         window.location.href = location.protocol + '//' + location.host + location.pathname;
     });
 
+    $('#full_size_image').click(function() {
+        window.open('image.html?id=' + globalCity.id, '_blank').focus();
+    });
+
     let loadById = function (id) {
         showLoader();
         $.ajax({
@@ -112,6 +116,7 @@ $( document ).ready(function() {
                 $('#builder_modal_city_name').val(city.name);
                 hideLoader();
                 $('#copy_public_link').show();
+                $('#full_size_image').show();
             },
             error: function() {
                 hideLoader();
@@ -246,12 +251,25 @@ $( document ).ready(function() {
         $("#builder_save_modal").modal();
     });
 
+    let city_name = $('#builder_modal_city_name');
+    city_name.on('input',function(e){
+        let val = city_name.val();
+        val = val.replaceAll('.', '');
+        city_name.val(val);
+    })
+
     $('#builder_modal_save').click(function() {
+        let name = city_name.val();
+        if(name.indexOf('http') >= 0 || name.indexOf('www.') >= 0) {
+            showError("Name can not contain URL!");
+            return;
+        }
+
         $("#builder_save_modal").modal('hide');
 
         var data = {
             id: getUrlParameter("id"),
-            name: $('#builder_modal_city_name').val(),
+            name: name,
             streets: []
         }
 

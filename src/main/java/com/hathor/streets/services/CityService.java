@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,6 +31,7 @@ public class CityService {
    public String createOrUpdateCity(CityDto cityDto) {
       if(cityDto.getId() == null) {
          City city = DtoConverter.fromDto(cityDto);
+         city.setEdited(new Date());
          cityRepository.save(city);
          cityStreetRepository.saveAll(city.getStreets());
          return city.getId();
@@ -62,6 +64,7 @@ public class CityService {
             }
          }
          city.get().setName(cityDto.getName());
+         city.get().setEdited(new Date());
          cityRepository.save(city.get());
          return city.get().getId();
       }
@@ -84,7 +87,9 @@ public class CityService {
    public List<City> getCities() {
       List<City> result = new ArrayList<>();
       for(City city : cityRepository.findAll()) {
-         result.add(city);
+         if(city.getDeleted() != null && !city.getDeleted()) {
+            result.add(city);
+         }
       }
       result = result.stream().sorted((o1, o2) -> {
          Integer max1 = o1.getStreets().stream().map(CityStreet::getId).max(Integer::compare).get();
