@@ -31,6 +31,7 @@ public class CityService {
    public String createOrUpdateCity(CityDto cityDto) {
       if(cityDto.getId() == null) {
          City city = DtoConverter.fromDto(cityDto);
+         city.setDeleted(false);
          city.setEdited(new Date());
          cityRepository.save(city);
          cityStreetRepository.saveAll(city.getStreets());
