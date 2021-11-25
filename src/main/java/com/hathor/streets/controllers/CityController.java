@@ -1,18 +1,20 @@
 package com.hathor.streets.controllers;
 
 import com.hathor.streets.controllers.dto.*;
-import com.hathor.streets.data.entities.City;
-import com.hathor.streets.data.entities.CityStreet;
-import com.hathor.streets.data.entities.Mint;
-import com.hathor.streets.data.entities.Street;
+import com.hathor.streets.data.entities.*;
+import com.hathor.streets.data.entities.enums.CityNftState;
+import com.hathor.streets.data.repositories.NftAddressRepository;
+import com.hathor.streets.data.repositories.NftCityRepository;
 import com.hathor.streets.data.repositories.CityRepository;
 import com.hathor.streets.services.CityService;
+import com.hathor.streets.services.NftCityService;
 import com.hathor.streets.services.StreetService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class CityController {
@@ -20,11 +22,14 @@ public class CityController {
    private final CityService cityService;
    private final StreetService streetService;
    private final CityRepository cityRepository;
+   private final NftCityService nftCityService;
 
-   public CityController(CityService cityService, StreetService streetService, CityRepository cityRepository) {
+   public CityController(CityService cityService, StreetService streetService, CityRepository cityRepository,
+                         NftCityService nftCityService) {
       this.cityService = cityService;
       this.streetService = streetService;
       this.cityRepository = cityRepository;
+      this.nftCityService = nftCityService;
    }
 
    @PostMapping("/city")
@@ -126,6 +131,24 @@ public class CityController {
 
       CityImageDto dto = new CityImageDto();
       dto.setIpfs(city.getIpfs());
+
+      return dto;
+   }
+
+   @GetMapping("/createCityNft/{cityId}/{address}")
+   public NftCityDto createCityNft(@PathVariable String cityId, @PathVariable String address) {
+      NftCity city = nftCityService.createNftCity(cityId, address);
+
+      NftCityDto dto = DtoConverter.toDto(city);
+
+      return dto;
+   }
+
+   @GetMapping("/getCityNft/{id}")
+   public NftCityDto getCityNft(@PathVariable String id) {
+      NftCity city = nftCityService.getNftCity(id);
+
+      NftCityDto dto = DtoConverter.toDto(city);
 
       return dto;
    }

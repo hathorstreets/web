@@ -1,10 +1,6 @@
 package com.hathor.streets.controllers.dto;
 
-import com.hathor.streets.data.entities.City;
-import com.hathor.streets.data.entities.CityStreet;
-import com.hathor.streets.data.entities.Mint;
-import com.hathor.streets.data.entities.Street;
-import com.hathor.streets.services.CityService;
+import com.hathor.streets.data.entities.*;
 import com.hathor.streets.services.RarityProvider;
 import com.hathor.streets.services.enums.AttributeType;
 
@@ -98,6 +94,30 @@ public class DtoConverter {
       }
 
       dto.setTiles(dto.getStreets().size());
+      return dto;
+   }
+
+   public static NftCityDto toDto(NftCity nftCity) {
+      NftCityDto dto = new NftCityDto();
+      dto.setDepositAddress(nftCity.getDepositAddress().getAddress());
+      dto.setId(nftCity.getId());
+      dto.setToken(nftCity.getToken());
+      dto.setUserAddress(nftCity.getUserAddress());
+      dto.setState(nftCity.getState());
+
+      dto.setStreets(nftCity.getStreets().stream().map(d -> {
+         NftCityStreetDto streetDto = new NftCityStreetDto();
+         streetDto.setSent(d.isSent());
+         streetDto.setToken(d.getStreet().getToken());
+         if(d.getStreet().getId() < 10000){
+            streetDto.setTokenSymbol("S" + d.getStreet().getId());
+         } else {
+            streetDto.setTokenSymbol("H" + (d.getStreet().getId() - 10000) + 1);
+         }
+         streetDto.setName("Hathor Street " + d.getStreet().getId());
+         return streetDto;
+      }).collect(Collectors.toList()));
+
       return dto;
    }
 }
