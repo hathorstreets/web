@@ -1,0 +1,34 @@
+/** Font settings **/
+$family-serif: 'Nunito sans', serif;
+$family-sans-serif: 'Playfair Display', sans-serif;
+$family-primary: $family-serif;
+$family-secondary: $family-sans-serif;
+$text-strong: inherit;
+
+/** Colors **/
+$streets-brown: #FAEBE0;
+$streets-green: #C9E4C5;
+$streets-greener: #B5CDA3;
+$streets-browner: #C1AC95;
+$streets-blue: #79B4B7;
+$streets-bluer: #CDF0EA;
+$streets-purple: #C490E4;
+
+/** Bulma colors **/
+$info: $streets-brown;
+$primary: $streets-greener;
+$success: $streets-green;
+$link: $streets-purple;
+
+@import "~bulma/sass/utilities/derived-variables";
+$addColors: (
+    "green":($streets-green, $black),
+    "brown":($streets-browner, $white),
+    "blue":($streets-blue, $white),
+    "bluer":($streets-bluer, $white),
+    "purple":($streets-purple, $white),
+);
+$colors: map-merge($colors, $addColors);
+
+
+

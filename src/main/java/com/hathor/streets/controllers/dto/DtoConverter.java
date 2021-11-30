@@ -11,14 +11,14 @@ public class DtoConverter {
 
    public static final int NFT_PRICE = 50;
 
-   public static MintDto toDto(Mint mint) {
+   public static MintDto toDto(Mint mint, RarityProvider rarityProvider) {
       MintDto dto = new MintDto();
       dto.setId(mint.getId());
       dto.setDepositAddress(mint.getDepositAddress().getAddress());
       if(mint.getStreets() != null && mint.getStreets().size() > 0) {
-         List<String> streets = mint.getStreets().stream()
+         List<StreetDto> streets = mint.getStreets().stream()
                  .sorted(Comparator.comparing(s -> s.getId(), (o1, o2) -> o1.compareTo(o2)))
-                 .map(s -> s.getId().toString())
+                 .map(s -> DtoConverter.toDto(s, rarityProvider))
                  .collect(Collectors.toList());
          dto.setStreets(streets);
       }

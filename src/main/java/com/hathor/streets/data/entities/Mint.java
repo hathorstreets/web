@@ -33,6 +33,8 @@ public class Mint {
 
    private int count = 1;
 
+   private String email;
+
    public String getId() {
       return id;
    }
@@ -111,5 +113,13 @@ public class Mint {
 
    public void setDead(boolean dead) {
       this.dead = dead;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
    }
 }

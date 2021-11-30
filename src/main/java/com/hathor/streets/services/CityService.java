@@ -100,4 +100,20 @@ public class CityService {
 
       return result;
    }
+
+   public List<City> getTopCities() {
+      List<City> result = new ArrayList<>();
+      for(City city : cityRepository.findAll()) {
+         if(city.getDeleted() != null && !city.getDeleted()) {
+            result.add(city);
+         }
+      }
+      result = result.stream().sorted((o1, o2) -> {
+         Integer max1 = o1.getStreets().stream().map(CityStreet::getId).max(Integer::compare).get();
+         Integer max2 = o2.getStreets().stream().map(CityStreet::getId).max(Integer::compare).get();
+         return max1.compareTo(max2);
+      }).collect(Collectors.toList());
+
+      return result;
+   }
 }

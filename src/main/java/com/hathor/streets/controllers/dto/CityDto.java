@@ -15,6 +15,8 @@ public class CityDto {
 
    private String name;
 
+   private String ipfs;
+
    private List<CityStreetDto> streets = new ArrayList<>();
 
    public String getId() {
@@ -63,5 +65,13 @@ public class CityDto {
 
    public void setTiles(int tiles) {
       this.tiles = tiles;
+   }
+
+   public String getIpfs() {
+      return ipfs;
+   }
+
+   public void setIpfs(String ipfs) {
+      this.ipfs = ipfs;
    }
 }

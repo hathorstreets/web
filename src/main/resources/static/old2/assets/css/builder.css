@@ -1,0 +1,158 @@
+#builder_city_name_wrapper {
+    position:fixed;
+    top:0;
+    width: 100%;
+    padding: 5px;
+    z-index: 999;
+    text-align: center;
+}
+
+.WrongPlacement {
+    filter: invert(27%) sepia(68%) saturate(1477%) hue-rotate(332deg) brightness(122%) contrast(68%);
+}
+
+.SelectDisable {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#builder_city_name_border {
+    background-color: #0d6d43;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+#builder_city_name {
+    border: 2px solid white;
+    padding: 12px;
+    color: white;
+    text-transform: capitalize;
+    font-size: 20pt;
+    border-radius: 10px;
+}
+
+.street {
+    width: 500px;
+    height: 420px;
+    /*background-image: url('../../images/test_street2.png'); */
+    background-position: center;
+    background-size: 100%;
+    position:absolute;
+    background-repeat: no-repeat;
+}
+
+.draggable {
+    width: 354px;
+    height: 354px;
+    position: absolute;
+    margin-left: 73px;
+    opacity: 0.5;
+    margin-top: 72px;
+    z-index: 99999;
+}
+
+.loading {
+    width: 353px;
+    height: 353px;
+    background-image: url('../../images/loading.gif');
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 74px;
+    margin-top: 73px;
+    z-index: -1000;
+    border: 1px solid #ccc;
+}
+
+/*.street:not(.share):hover {*/
+/*    z-index: 99991 !important;*/
+/*    filter: brightness(125%);*/
+/*}*/
+
+.draggable:not(.share):hover {
+    background-color: white;
+    opacity:0.3;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#builder_search_input {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 500px;
+    z-index: 999;
+    padding: 0.55em;
+}
+
+#builder_search {
+    position: absolute;
+    top: 10px;
+    left: 530px;
+    padding: 0.6em 2em 0.6em 2em;
+    z-index: 999;
+}
+
+#save_button {
+    position: absolute;
+    top: 10px;
+    left: 650px;
+    z-index: 999;
+    padding: 0.6em 2em 0.6em 2em;
+}
+
+#start_over {
+    position: absolute;
+    top: 10px;
+    left: 755px;
+    padding: 0.6em 2em 0.6em 2em;
+    z-index: 999;
+}
+
+#full_size_image {
+    position: absolute;
+    top: 10px;
+    left: 1035px;
+    padding: 0.6em 2em 0.6em 2em;
+    z-index: 999;
+    display: none;
+}
+
+#create_nft {
+    position: absolute;
+    top: 10px;
+    left: 1235px;
+    padding: 0.6em 2em 0.6em 2em;
+    z-index: 999;
+    display: none;
+}
+
+#copy_public_link {
+    position: absolute;
+    top: 10px;
+    left: 865px;
+    padding: 0.6em 2em 0.6em 2em;
+    z-index: 999;
+    display: none;
+}
+
+.Tool {
+    background: #e6efe2 !important;
+}
+
+input[type="checkbox"] {
+    appearance: checkbox !important;
+}
+
+.Checkbox {
+    width: 100%;
+    text-align: right;
+}

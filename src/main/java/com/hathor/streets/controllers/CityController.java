@@ -2,9 +2,6 @@ package com.hathor.streets.controllers;
 
 import com.hathor.streets.controllers.dto.*;
 import com.hathor.streets.data.entities.*;
-import com.hathor.streets.data.entities.enums.CityNftState;
-import com.hathor.streets.data.repositories.NftAddressRepository;
-import com.hathor.streets.data.repositories.NftCityRepository;
 import com.hathor.streets.data.repositories.CityRepository;
 import com.hathor.streets.services.CityService;
 import com.hathor.streets.services.NftCityService;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class CityController {
@@ -93,6 +90,30 @@ public class CityController {
          CityDto dto = DtoConverter.toDto(city, false);
          dto.setOrder(order);
          result.add(dto);
+         order++;
+      }
+      return result;
+   }
+
+   @GetMapping("/topCities")
+   public List<CityDto> getTopCities() {
+      List<CityDto> result = new ArrayList<>();
+      List<City> cities = cityService.getCities();
+
+      cities = cities.stream().sorted((o1, o2) ->
+              new Integer(o2.getStreets().size()).compareTo(new Integer(o1.getStreets().size()))).collect(Collectors.toList());
+
+      cities = cities.subList(0, Math.min(6, cities.size()));
+
+      int order = 1;
+      for(City city : cities) {
+         CityDto dto = DtoConverter.toDto(city, false);
+         dto.setOrder(order);
+         result.add(dto);
+
+         Street s = streetService.getStreet(dto.getStreets().get(0).getStreetId());
+         dto.setIpfs(s.getIpfs());
+
          order++;
       }
       return result;
