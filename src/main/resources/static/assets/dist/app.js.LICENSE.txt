@@ -1,0 +1,12 @@
+/*!
+ * Chart.js v3.6.0
+ * https://www.chartjs.org
+ * (c) 2021 Chart.js Contributors
+ * Released under the MIT License
+ */
+
+/*! DataTables 1.11.3
+ * ©2008-2021 SpryMedia Ltd - datatables.net/license
+ */
+
+/*! DataTables Bulma integration */

@@ -1,0 +1,41 @@
+// Smooth scroll
+html {
+    scroll-behavior: smooth;
+}
+// Reversed columns
+.is-reversed {
+    @media(max-width: $tablet) {
+        flex-direction: column-reverse;
+        display: flex;
+        align-items: normal !important;
+    }
+}
+.has-font-weight-light {
+    font-weight: 200;
+}
+.navbar-item {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.progress {
+    max-width: 500px;
+    margin: auto;
+    overflow:visible;
+}
+progress:after {
+    content: attr(value)'%';
+}
+.city {
+    background: $streets-greener;
+    color: $white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 11px;
+    border: $white 4px solid;
+}
+.images img {
+    width: 80px;
+    border-radius: 20px;
+    margin-bottom: 1px;
+    margin-right: 1px;
+}

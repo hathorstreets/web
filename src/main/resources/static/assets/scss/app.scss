@@ -1,0 +1,39 @@
+// fonts
+@import url("https://fonts.googleapis.com/css?family=Nunito+Sans:200,400,700|Playfair+Display:400,700&display=swap&subset=latin-ext");
+
+// bulma vars
+@import "~bulma/sass/utilities/initial-variables.sass";
+
+// functions 
+@import "functions";
+
+// variables
+@import "variables";
+
+//bulma core
+@import "~bulma/bulma.sass";
+
+// style for theme
+@import "style";
+
+// style for navbar
+@import "navbar";
+
+// style for hero
+@import "hero";
+
+
+// style for footer
+@import "footer";
+
+// datatables
+@import "~datatables-bulma/css/dataTables.bulma.css";
+@import "~datatables.net-bulma/css/dataTables.bulma.css";
+
+// cookie consent
+@import "~cookieconsent/src/styles/animation.css";
+@import "~cookieconsent/src/styles/base.css";
+@import "~cookieconsent/src/styles/layout.css";
+@import "~cookieconsent/src/styles/media.css";
+@import "~cookieconsent/src/styles/themes/classic.css";
+

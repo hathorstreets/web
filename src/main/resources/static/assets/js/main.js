@@ -1,66 +1,86 @@
-/*
-	Telephasic by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+$( document ).ready(function() {
+    let mint = $('#mint');
+    let address = $('#address');
+    let email = $('#email');
+    let count = $('#count');
+    let freeCounter = $('.free_counter');
+    let cityDiv = $('#cities');
+    let progress = $('#progress');
 
-(function($) {
+    //address.val('HSHqkJstGEDZN5sold_counterm5AKXvX9d1j56DwATNSG');
 
-	var	$window = $(window),
-		$body = $('body');
+    let refreshSoldCount = function() {
+        $.ajax({
+            url: '/street/sold',
+            type: 'GET',
+            success: function(soldCount){
+                freeCounter.html((11111 - soldCount.count));
+                progress.val(parseInt((soldCount.count / 11111) * 100))
+            }
+        });
+    };
 
-	// Breakpoints.
-		breakpoints({
-			normal:    [ '1081px',  '1280px'  ],
-			narrow:    [ '821px',   '1080px'  ],
-			narrower:  [ '737px',   '820px'   ],
-			mobile:    [ '481px',   '736px'   ],
-			mobilep:   [ null,      '480px'   ]
-		});
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+    $.ajax({
+        url: '/topCities',
+        type: 'GET',
+        success: function(cities){
+            for(let i in cities){
+                let city = cities[i];
+                let ipfs = city.ipfs;
+                let name = city.name;
+                let shareId = city.shareId;
 
-	// Dropdowns.
-		$('#nav > ul').dropotron({
-			mode: 'fade',
-			speed: 300,
-			alignment: 'center',
-			noOpenerFade: true
-		});
+                let column = $('<div class="column">');
+                let title = $('<h3 class="is-size-5 city mb-3" style="cursor: pointer;" shareId = "' + shareId + '">');
+                let count = $('<span class="has-text-white">');
+                let img = $('<img src="' + ipfs + '">')
 
-	// Nav.
+                title.html(name);
+                count.html(city.streets.length + ' streets');
+                column.append(title);
+                column.append(count);
+                column.append(img);
 
-		// Buton.
-			$(
-				'<div id="navButton">' +
-					'<a href="#navPanel" class="toggle"></a>' +
-				'</div>'
-			)
-				.appendTo($body);
+                title.click(function(){
+                    let shareId = $(this).attr('shareId');
+                    window.location.href = 'builder.html?shareId=' + shareId;
+                })
 
-		// Panel.
-			$(
-				'<div id="navPanel">' +
-					'<nav>' +
-						'<a href="index.html" class="link depth-0">Home</a>' +
-						$('#nav').navList() +
-					'</nav>' +
-				'</div>'
-			)
-				.appendTo($body)
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					resetScroll: true,
-					resetForms: true,
-					side: 'top',
-					target: $body,
-					visibleClass: 'navPanel-visible'
-				});
+                cityDiv.append(column);
+            }
+        }
+    });
 
-})(jQuery);
+    refreshSoldCount();
+    setInterval(refreshSoldCount, 10000);
+
+    mint.click(function(){
+        let addr = address.val();
+        if (!addr || addr.length !== 34) {
+            showError("Invalid address!");
+            return;
+        }
+
+        let c = count.val();
+        if (!c || c < 1 || c > 10) {
+            showError("Invalid count");
+            return;
+        }
+        let mail = email.val();
+        if(!mail || mail === '') {
+            mail = 'empty';
+        }
+        showLoader();
+        $.ajax({
+            url: '/mint/' + addr + '/' + c + '/' + mail,
+            type: 'GET',
+            success: function(mint){
+                window.location.href = 'mint.html?mint=' + mint.id;
+            },
+            error: function(data) {
+                showError("Something went wrong, please try again later!");
+            }
+        });
+    });
+});

@@ -117,6 +117,7 @@ $( document ).ready(function() {
                 hideLoader();
                 $('#copy_public_link').show();
                 $('#full_size_image').show();
+                $('#create_nft').show();
             },
             error: function() {
                 hideLoader();

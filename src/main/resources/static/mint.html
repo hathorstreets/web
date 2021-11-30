@@ -1,100 +1,197 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-    <title>Hathor Streets Mint Status</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css?version=7" />
-    <link rel="stylesheet" href="assets/css/snackbar.css?version=3" />
+<!DOCTYPE html>
+<html lang="sk">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-C0HSRNN3DF"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    <script src="javascripts/jquery-3.6.0.min.js"></script>
-    <script src="javascripts/static.js"></script>
-    <script src="javascripts/mint.js"></script>
-    <script src="javascripts/qrcode.min.js"></script>
+        gtag('config', 'G-C0HSRNN3DF');
+        </script>
 
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-</head>
-<body class="no-sidebar is-preload">
-<div id="snackbar"></div>
-<div id="page-wrapper">
-    <div id="header-wrapper">
-        <a id="logo" href="index.html">
-            <img src="images/logo_small.png" width="74" height="74" alt="Home">
-            <span id="title">HATHOR STREETS</span>
-        </a>
-        <div id="header" class="container">
-            <nav id="nav" style="text-align: right;">
-                <ul style="margin-right: 20px;">
-                    <li><a href="cities.html">Cities</a></li>
-                    <li><a target="_blank" href="images/rarity_table.jpg">Rarity Table</a></li>
-                    <li><a target="_blank" href="explorer.html">Explorer</a></li>
-                    <li><a href="builder.html">Builder</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+        <script src="assets/js/jquery-3.6.0.min.js"></script>
+        <script src="assets/js/static.js"></script>
+        <script src="assets/js/mint.js?version=1"></script>
+        <script src="assets/js/qrcode.min.js"></script>
 
-    <div class="wrapper" style="flex: 1;">
-        <div class="container" id="main" style="width: 800px;">
-            <section class="col-6 col-12-narrower">
-                <div class="mint card" id="mint_wrapper">
-                    <div id="mint_status" class="Hidden"></div>
-                    <div id="mint_qrcode" class="Hidden"></div>
-                    <div id="mint_address_wrapper" class="Hidden">
-                        <div id="mint_address"></div>
-                        <a id="mint_copy"><i class="fas fa-copy"></i></a>
-                    </div>
-                    <div id="mint_sending" class="Hidden">
-                        <i class="fas fa-paper-plane"></i>
-                    </div>
-                    <div id="mint_sold_out" class="Hidden">
-                        <i class="fas fa-sad-cry"></i>
-                    </div>
-                    <div id="mint_sent_back" class="Hidden">
-                        <i class="fas fa-smile"></i>
-                    </div>
-                    <div id="mint_nft_wrapper" class="Hidden">
-                        <i class="fas fa-check-square"></i>
-                        <div id="mint_nft"></div>
+        <link rel="stylesheet" href="assets/css/snackbar.css?version=3" />
+
+        <meta charset="utf-8">
+        <title>Build your hathor city! | Hathor Streets</title>
+        <meta name="description" content="Start building your unique hathor city with NFT pictures of streets!">
+        <meta name="title" content="Build your hathor city! | Hathor Streets">
+        <meta name="author" content="nerd.sk">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Build your hathor city! | Hathor Streets" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://hathorstreets.com" />
+        <meta property="og:image" content="{{ ogImage }}" />
+        <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="assets/images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="assets/images/apple-touch-icon-76x76.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="assets/images/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="assets/images/apple-touch-icon-144x144.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="assets/images/apple-touch-icon-152x152.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon-180x180.png" />
+        <link rel="icon" type="image/png" href="apple-touch-icon.png">
+        <link href="assets/dist/app.css?v=14" rel="stylesheet">
+        <style>
+            #qrcode img {display: inline !important;}
+        </style>
+    </head>
+    <body class="has-navbar-fixed-top">
+        <div id="snackbar"></div>
+        <!-- Header -->
+        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                <a class="navbar-item" href="https://hathorstreets.com">
+                    <img src="assets/images/logo_hathor_streets.svg?v=1" alt="Logo">
+                </a>
+
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="#navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+                </div>
+
+                <div id="navbarMenu" class="navbar-menu">
+                    <div class="navbar-end has-text-weight-bold">
+                        <a href="cities.html" class="navbar-item">
+                            Cities
+                        </a>
+                        <a href="/images/rarity_table.jpg" class="navbar-item" target="_blank">
+                            Rarity table
+                        </a>
+                        <a href="/explorer.html" class="navbar-item">
+                            Explorer
+                        </a>
+                        <a href="/builder.html" class="navbar-item">
+                            Builder
+                        </a>
+                        <a class="navbar-item" target="_blank" href="https://twitter.com/HathorStreets">
+                            <span class="icon">
+                                <i class="fab fa-twitter"></i>
+                            </span>
+                        </a>
+                        <a class="navbar-item" target="_blank" href="https://t.me/hathorstreets">
+                            <span class="icon">
+                                <i class="fab fa-telegram"></i>
+                            </span>
+                        </a>
+                        <div class="navbar-item">
+                            <div class="field ">
+                                <p class="control">
+                                    <a class="button is-purple" href="/index.html#getStreets">
+                                        Get one!
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div id="footer-wrapper">
-        <div id="footer" class="container" style="width: 600px;">
-            <div class="row" style="margin-left: 0;">
-
-                <section class="col-6 col-12-narrower" style="margin: auto; text-align: center; padding: 0;">
-                    <div class="row gtr-0">
-                        <ul class="divided icons col-6 col-12-mobile">
-                            <li class="icon brands fa-twitter"><a target="_blank" href="https://twitter.com/HathorStreets">Twitter</a></li>
-                        </ul>
-                        <ul class="divided icons col-6 col-12-mobile">
-                            <li class="icon brands fa-telegram"><a target="_blank" href="https://t.me/hathorstreets">Telegram</a></li>
-                        </ul>
-                    </div>
-                </section>
             </div>
-        </div>
-        <div id="copyright" class="container">
-            <ul class="menu">
-                <li>&copy; Hathor Streets. All rights reserved.</li>
-            </ul>
-        </div>
-    </div>
+        </nav>
 
-</div>
+        <section class="section" id="send_section" style="display: none;">
+            <div class="container has-text-centered">
+                <h2 class="is-size-1 has-text-weight-light mb-5">Just one more step</h2>
+                <p class="is-size-5 mb-3">
+                    Send <strong id="price">50 $HTR</strong> to this address:
+                    <br>
+                    <strong id="deposit_address">HTK42tnPHwgxhekLFaoLjQ4Etawn3tZfvT</strong>
+                    <a id="mint_copy"><i class="fas fa-copy"></i></a>
+                </p>
+                <div id="qrcode" style="text-align: center;"></div>
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.dropotron.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+                <ul>
+                    <li>It takes some time to process it (up to hour), so get some ☕ </li>
+                    <li>Bookmark this page or leave it open.</li>
+                    <li>We will send you email, when its done.</li>
+                </ul>
+                <button class="button is-blue mt-5 has-text-weight-bold" style="cursor: default;">
+                    Waiting for deposit
+                    <br>
+                    <span class="icon is-medium">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </span>
+                </button>
 
-</body>
+            </div>
+        </section>
+
+        <section class="section" id="deposit_section" style="display: none;">
+            <div class="container has-text-centered">
+                <h2 class="is-size-1 has-text-weight-light mb-5">Ready, set...</h2>
+                <p class="is-size-5 mb-3">
+                    We have received your payment!
+                </p>
+                <ul>
+                    <li>We are sending you your streets NFTs.</li>
+                    <li>It takes some time (up to hour), so please be patient.</li>
+                    <li>Thank you for supporting HTR network and the community <i class="far fa-heart"></i>.</li>
+                </ul>
+                <button class="button is-blue mt-5 has-text-weight-bold" style="cursor: default;">
+                    Sending NFTs...
+                    <br>
+                    <span class="icon is-medium">
+                        <i class="fas fa-circle-notch fa-spin"></i>
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <section class="section" id="nft_section" style="display: none;">
+            <div class="container has-text-centered">
+                <h1 class="is-size-1 has-text-weight-light mb-5">Time to play</h1>
+                <p class="is-size-5 mb-3">
+                    Your streets are waiting for you, <strong>lets check them up!</strong> <br>
+                    You can <a class="builder_link" target="_blank" href=""><strong>build your unique NFT city</strong></a> with your streets. <br>
+                    Thank you for your support <i class="far fa-heart"></i>.
+                </p>
+
+                <div id="nft_container"></div>
+
+                <a class="builder_link" target="_blank" href="">
+                    <button class="button is-blue mt-5 has-text-weight-bold">
+                        Let's build city
+                        <br>
+                        <span class="icon is-medium">
+                            <i class="fas fa-city"></i>
+                        </span>
+                    </button>
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer has-background-black has-text-purple has-text-weight-light is-size-5">
+            <div class="container">
+               <h4 class="mb-3"><strong>Hathor</strong>streets 2021</h4>
+               <ul>
+                   <li><a href="/cities.html">Cities</a></li>
+                   <li><a href="/images/rarity_table.jpg" target="_blank">Rarity table</a></li>
+                   <li><a href="/explorer.html">Explorer</a></li>
+                   <li><a href="/builder.html">Builder</a></li>
+                   <li><a href="/index.html#getStreets">Get Hathor street</a></li>
+                   <li><a href="https://twitter.com/HathorStreets" target="_blank">Twitter</a></li>
+                   <li><a href="https://t.me/hathorstreets" target="_blank">Telegram</a></li>
+               </ul>
+            </div>
+        </footer>
+
+
+        <!-- Scripts -->
+        <script src="https://kit.fontawesome.com/3a6264d847.js" crossorigin="anonymous"></script>
+        <script src="assets/dist/manifest.js?v=1"></script>
+        <script src="assets/dist/vendor.js?v=1"></script>
+        <script src="assets/dist/app.js?v=5"></script>
+    </body>
 </html>

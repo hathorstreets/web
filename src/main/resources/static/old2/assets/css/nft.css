@@ -1,0 +1,39 @@
+#nft_qrcode img {
+    margin: auto;
+}
+
+#nft_status {
+    margin-bottom: 1em;
+}
+
+#nft_address {
+    margin-top: 1em;
+}
+
+#nft_sending {
+    font-size: 84pt;
+}
+
+#nft_sold_out {
+    font-size: 84pt;
+}
+
+#nft_sent_back {
+    font-size: 84pt;
+}
+
+#nft_nft_wrapper i{
+    font-size: 84pt;
+}
+
+#nft_nft {
+    margin-top: 1em;
+}
+
+#mint {
+    padding: 0.8em 1.65em 0.8em 1.65em;
+}
+
+.QrCode img{
+    margin-bottom: 2em !important;
+}

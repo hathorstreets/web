@@ -1,0 +1,21 @@
+.hero {
+    background-image: url('/assets/images/street_half.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 450px;
+
+    @media(max-width: 960px) {
+        background-size: 330px;
+    }
+
+    @media(max-width: $tablet) {
+        background-size: 150px;
+        background-position: right bottom;
+    }
+
+    .hero-body {
+        @media(max-width: $tablet) {
+            padding: 2rem 1.5rem 6rem 1.5rem;
+        }
+    }
+}

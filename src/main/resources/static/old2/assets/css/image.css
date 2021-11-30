@@ -1,0 +1,8 @@
+.Zoomed {
+    width: 100%;
+    cursor: zoom-in;
+}
+
+.NotZoomed{
+    cursor: zoom-out;
+}

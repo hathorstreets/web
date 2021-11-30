@@ -3,8 +3,7 @@ package com.hathor.streets.data.entities;
 import javax.persistence.*;
 
 @Entity
-public class SwapAddress {
-
+public class NftAddress {
    @Id
    @GeneratedValue(strategy= GenerationType.AUTO)
    private Integer id;

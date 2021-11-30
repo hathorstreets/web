@@ -7,7 +7,7 @@ public class MintDto {
    private int state;
    private String depositAddress;
    private String userAddress;
-   private List<String> streets;
+   private List<StreetDto> streets;
    private int price;
 
    public String getId() {
@@ -34,11 +34,11 @@ public class MintDto {
       this.depositAddress = depositAddress;
    }
 
-   public List<String> getStreets() {
+   public List<StreetDto> getStreets() {
       return streets;
    }
 
-   public void setStreets(List<String> streets) {
+   public void setStreets(List<StreetDto> streets) {
       this.streets = streets;
    }
 

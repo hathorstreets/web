@@ -2,6 +2,7 @@ package com.hathor.streets.services;
 
 import com.hathor.streets.data.entities.Address;
 import com.hathor.streets.data.entities.Mint;
+import com.hathor.streets.data.entities.Sale;
 import com.hathor.streets.data.entities.Street;
 import com.hathor.streets.data.entities.enums.MintState;
 import com.hathor.streets.data.repositories.AddressRepository;
@@ -14,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityNotFoundException;
-import java.util.Date;
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Service
 public class MintService {
@@ -36,7 +37,7 @@ public class MintService {
    }
 
    @Transactional
-   public Mint createMint(String address, int count) {
+   public Mint createMint(String address, int count, String email) {
       Address depositAddress = addressRepository.findTopByTaken(false);
       if (depositAddress == null) {
          throw new IllegalStateException("We have no addresses left");
@@ -50,6 +51,9 @@ public class MintService {
       m.setDepositAddress(depositAddress);
       m.setCount(count);
       m.setCreated(new Date());
+      if(email != null && !email.isEmpty()) {
+         m.setEmail(email);
+      }
       mintRepository.save(m);
 
       return m;
@@ -61,5 +65,19 @@ public class MintService {
          throw new EntityNotFoundException("Mint with id " + id + " not found");
       }
       return mint.get();
+   }
+
+   public List<Sale> getSales() {
+      List<Map> sales = mintRepository.getSales();
+      List<Sale> result = new ArrayList<>();
+      for(Map map : sales) {
+         Sale sale = new Sale();
+         sale.setYear((int)map.get("year"));
+         sale.setMonth((int)map.get("month"));
+         sale.setDay((int)map.get("day"));
+         sale.setCount(((BigDecimal)map.get("count")).intValue());
+         result.add(sale);
+      }
+      return result;
    }
 }
