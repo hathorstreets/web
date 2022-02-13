@@ -9,6 +9,9 @@ public class NftCityDto {
    private String depositAddress;
    private String userAddress;
    private String token;
+   private String tokenWithoutTraits;
+   private String ipfs;
+   private String ipfsWithoutTraits;
 
    private List<NftCityStreetDto> streets;
 
@@ -58,5 +61,29 @@ public class NftCityDto {
 
    public void setStreets(List<NftCityStreetDto> streets) {
       this.streets = streets;
+   }
+
+   public String getTokenWithoutTraits() {
+      return tokenWithoutTraits;
+   }
+
+   public void setTokenWithoutTraits(String tokenWithoutTraits) {
+      this.tokenWithoutTraits = tokenWithoutTraits;
+   }
+
+   public String getIpfs() {
+      return ipfs;
+   }
+
+   public void setIpfs(String ipfs) {
+      this.ipfs = ipfs;
+   }
+
+   public String getIpfsWithoutTraits() {
+      return ipfsWithoutTraits;
+   }
+
+   public void setIpfsWithoutTraits(String ipfsWithoutTraits) {
+      this.ipfsWithoutTraits = ipfsWithoutTraits;
    }
 }

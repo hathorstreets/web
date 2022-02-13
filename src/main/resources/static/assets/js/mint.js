@@ -47,9 +47,11 @@ $( document ).ready(function() {
             columns.append(column);
             let box = $('<div class="box">');
             column.append(box);
+            let titleA = $('<a target="_blank" style="color: black;" href="explorer.html?id=' + street.id + '"></a>');
             let title = $('<h2 class="has-text-weight-bold is-size-3">');
             title.html("Street no. " + street.id);
-            box.append(title);
+            titleA.append(title);
+            box.append(titleA);
             let imgWrapper = $('<div class="is-fullwidth mb-5" style="position: relative; min-height: 234px">');
             let img = $('<img src="' + street.ipfs + '" class="image is-fullwidth mb-5" alt="">');
             let imgLoader = $('<img src="images/loading.gif" class="image is-fullwidth mb-5" alt="" style="position: absolute; top: 0; left: 0; padding: 50px;">');

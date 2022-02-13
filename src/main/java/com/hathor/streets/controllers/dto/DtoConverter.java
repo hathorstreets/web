@@ -104,6 +104,9 @@ public class DtoConverter {
       dto.setToken(nftCity.getToken());
       dto.setUserAddress(nftCity.getUserAddress());
       dto.setState(nftCity.getState());
+      dto.setTokenWithoutTraits(nftCity.getTokenWithoutTraits());
+      dto.setIpfsWithoutTraits(nftCity.getIpfsWithoutTraits());
+      dto.setIpfs(nftCity.getIpfs());
 
       dto.setStreets(nftCity.getStreets().stream().map(d -> {
          NftCityStreetDto streetDto = new NftCityStreetDto();

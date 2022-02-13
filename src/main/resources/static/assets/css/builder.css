@@ -129,7 +129,7 @@ html, body {
 #create_nft {
     position: absolute;
     top: 10px;
-    left: 1235px;
+    left: 1200px;
     padding: 0.6em 2em 0.6em 2em;
     z-index: 999;
     display: none;

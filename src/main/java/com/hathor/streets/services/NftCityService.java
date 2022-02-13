@@ -16,16 +16,16 @@ public class NftCityService {
 
    private final NftCityRepository nftCityRepository;
    private final CityRepository cityRepository;
-   private final NftAddressRepository nftAddressRepository;
+   private final AddressRepository addressRepository;
    private final StreetRepository streetRepository;
    private final NftCityStreetRepository nftCityStreetRepository;
 
    public NftCityService(NftCityRepository nftCityRepository, CityRepository cityRepository,
-                         NftAddressRepository nftAddressRepository, StreetRepository streetRepository,
+                         AddressRepository addressRepository, StreetRepository streetRepository,
                          NftCityStreetRepository nftCityStreetRepository) {
       this.nftCityRepository = nftCityRepository;
       this.cityRepository = cityRepository;
-      this.nftAddressRepository = nftAddressRepository;
+      this.addressRepository = addressRepository;
       this.streetRepository = streetRepository;
       this.nftCityStreetRepository = nftCityStreetRepository;
    }
@@ -38,12 +38,12 @@ public class NftCityService {
       }
       Optional<NftCity> cityNftOptional = nftCityRepository.findCityNftByCity(city.get());
       if(!cityNftOptional.isPresent()) {
-         NftAddress depositAddress = nftAddressRepository.findTopByTaken(false);
+         Address depositAddress = addressRepository.findTopByTaken(false);
          if (depositAddress == null) {
             throw new IllegalStateException("We have no addresses left");
          }
          depositAddress.setTaken(true);
-         nftAddressRepository.save(depositAddress);
+         addressRepository.save(depositAddress);
 
          NftCity nftCity = new NftCity();
          nftCity.setCity(cityRepository.findById(cityId).get());
