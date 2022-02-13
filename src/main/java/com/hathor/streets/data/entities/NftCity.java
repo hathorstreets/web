@@ -19,10 +19,16 @@ public class NftCity {
 
    private String token;
 
+   private String tokenWithoutTraits;
+
+   private String ipfs;
+
+   private String ipfsWithoutTraits;
+
    private String transaction;
 
    @ManyToOne
-   private NftAddress depositAddress;
+   private Address depositAddress;
 
    private String userAddress;
 
@@ -82,11 +88,11 @@ public class NftCity {
       this.city = city;
    }
 
-   public NftAddress getDepositAddress() {
+   public Address getDepositAddress() {
       return depositAddress;
    }
 
-   public void setDepositAddress(NftAddress depositAddress) {
+   public void setDepositAddress(Address depositAddress) {
       this.depositAddress = depositAddress;
    }
 
@@ -112,5 +118,29 @@ public class NftCity {
 
    public void setStreets(Set<NftCityStreet> streets) {
       this.streets = streets;
+   }
+
+   public String getTokenWithoutTraits() {
+      return tokenWithoutTraits;
+   }
+
+   public void setTokenWithoutTraits(String tokenWithoutTraits) {
+      this.tokenWithoutTraits = tokenWithoutTraits;
+   }
+
+   public String getIpfs() {
+      return ipfs;
+   }
+
+   public void setIpfs(String ipfs) {
+      this.ipfs = ipfs;
+   }
+
+   public String getIpfsWithoutTraits() {
+      return ipfsWithoutTraits;
+   }
+
+   public void setIpfsWithoutTraits(String ipfsWithoutTraits) {
+      this.ipfsWithoutTraits = ipfsWithoutTraits;
    }
 }
