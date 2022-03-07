@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+$(document).ready(function () {
 
     let gridSnapX = 249.6;
     let gridSnapY = 144;
@@ -9,17 +9,17 @@ $( document ).ready(function() {
     let validateStreets = function () {
         let wrongStreets = [];
         let streets = $('.street');
-        streets.each(function() {
+        streets.each(function () {
             let i_street = $(this);
             let x = i_street.attr('data-x');
             let y = i_street.attr('data-y');
 
-            streets.each(function() {
+            streets.each(function () {
                 let j_street = $(this);
                 let xx = j_street.attr('data-x');
                 let yy = j_street.attr('data-y');
 
-                if(i_street.attr('street_id') !== j_street.attr('street_id')) {
+                if (i_street.attr('street_id') !== j_street.attr('street_id')) {
                     let collision = false;
 
                     if (round(Math.abs(xx - x)) === gridSnapX) {
@@ -34,7 +34,7 @@ $( document ).ready(function() {
                         }
                     }
 
-                    if(collision) {
+                    if (collision) {
                         wrongStreets.push(i_street);
                         wrongStreets.push(j_street);
                     }
@@ -46,54 +46,62 @@ $( document ).ready(function() {
         wrongStreets.forEach(st => st.addClass('WrongPlacement'));
     }
 
-    let addStreet = function(st, isShare) {
-        let street = $('<img src="' + st.ipfs + '" class="street SelectDisable" street_id="' + st.streetId + '" street_city_id="' + st.id + '">');
+    let addStreet = function (st, isShare) {
+        let street = $('<img src="' + st.ipfs
+            + '" class="street SelectDisable" street_id="' + st.streetId
+            + '" street_city_id="' + st.id + '">');
         street.css('transform', 'translate(' + st.x + 'px, ' + st.y + 'px)');
         street.attr('data-x', st.x);
         street.attr('data-y', st.y);
         street.css('z-index', Math.round(st.y));
 
-        let draggable = $('<div class="draggable" street_id="' + st.streetId + '"></div>');
-        draggable.css('transform', 'translate(' + st.x + 'px, ' + st.y + 'px) rotateX(55deg) rotateZ(45deg)');
+        let draggable = $(
+            '<div class="draggable" street_id="' + st.streetId + '"></div>');
+        draggable.css('transform', 'translate(' + st.x + 'px, ' + st.y
+            + 'px) rotateX(55deg) rotateZ(45deg)');
         draggable.attr('data-x', st.x);
         draggable.attr('data-y', st.y);
-        if(shareId) {
+        if (shareId) {
             draggable.addClass('share');
         }
 
-        let loading = $('<div class="loading" street_id="' + st.streetId + '"></div>');
-        loading.css('transform', 'translate(' + st.x + 'px, ' + st.y + 'px) rotateX(55deg) rotateZ(45deg)');
+        let loading = $(
+            '<div class="loading" street_id="' + st.streetId + '"></div>');
+        loading.css('transform', 'translate(' + st.x + 'px, ' + st.y
+            + 'px) rotateX(55deg) rotateZ(45deg)');
 
         $("body").append(street);
         $("body").append(draggable);
         $("body").append(loading);
 
-        street.on('load', function(){
+        street.on('load', function () {
             let street_id = $(this).attr('street_id');
-            $('.loading').each(function() {
-                if ($(this).attr("street_id") === street_id){
+            $('.loading').each(function () {
+                if ($(this).attr("street_id") === street_id) {
                     $(this).remove();
                 }
             })
         });
 
-        if(!isShare) {
+        if (!isShare) {
             validateStreets();
         }
     }
 
-    $('#copy_public_link').click(function(){
-        let val = location.protocol + '//' + location.host + location.pathname + '?shareId=' + globalCity.shareId;
+    $('#copy_public_link').click(function () {
+        let val = location.protocol + '//' + location.host + location.pathname
+            + '?shareId=' + globalCity.shareId;
         //navigator.clipboard.writeText(val);
         copyToClipboard(val);
         showInfo("Public link copied!");
     });
 
-    $('#start_over').click(function(){
-        window.location.href = location.protocol + '//' + location.host + location.pathname;
+    $('#start_over').click(function () {
+        window.location.href = location.protocol + '//' + location.host
+            + location.pathname;
     });
 
-    $('#full_size_image').click(function() {
+    $('#full_size_image').click(function () {
         window.open('image.html?id=' + globalCity.id, '_blank').focus();
     });
 
@@ -103,12 +111,12 @@ $( document ).ready(function() {
             type: "GET",
             url: '/city/' + id,
             contentType: "application/json; charset=utf-8",
-            success: function(city) {
-                $('.street').each(function() {
+            success: function (city) {
+                $('.street').each(function () {
                     $(this).remove();
                 })
                 globalCity = city;
-                for(i in city.streets){
+                for (i in city.streets) {
                     let st = city.streets[i];
 
                     addStreet(st);
@@ -119,7 +127,7 @@ $( document ).ready(function() {
                 $('#full_size_image').show();
                 $('#create_nft').show();
             },
-            error: function() {
+            error: function () {
                 hideLoader();
                 showError("Something went wrong!");
             },
@@ -133,7 +141,7 @@ $( document ).ready(function() {
     }
 
     let shareId = getUrlParameter("shareId");
-    if(shareId) {
+    if (shareId) {
         $('#builder_tool_bar').hide();
 
         showLoader();
@@ -141,19 +149,19 @@ $( document ).ready(function() {
             type: "GET",
             url: '/city/share/' + shareId,
             contentType: "application/json; charset=utf-8",
-            success: function(city) {
-                for(i in city.streets){
+            success: function (city) {
+                for (i in city.streets) {
                     let st = city.streets[i];
 
                     addStreet(st, true);
                 }
-                if(city.name && city.name !== '') {
+                if (city.name && city.name !== '') {
                     $('#builder_city_name').html(city.name.toUpperCase());
                     $('#builder_city_name_wrapper').show();
                 }
                 hideLoader();
             },
-            error: function() {
+            error: function () {
                 hideLoader();
                 showError("Something went wrong!");
             },
@@ -162,7 +170,7 @@ $( document ).ready(function() {
     }
 
     let modalCookie = getCookie("builder_modal1");
-    if(!shareId) {
+    if (!shareId) {
         if (!modalCookie || modalCookie === 'false') {
             $("#builderModal").modal();
         }
@@ -172,7 +180,7 @@ $( document ).ready(function() {
         })
     }
 
-    let searchStreets = function() {
+    let searchStreets = function () {
         let search_val = search.val();
         search_val = search_val.replace(' ', '');
         showLoader();
@@ -181,26 +189,26 @@ $( document ).ready(function() {
             url: '/streets/search',
             data: search_val,
             contentType: "application/json; charset=utf-8",
-            success: function(d) {
+            success: function (d) {
                 var j = 0;
                 var z = 1;
                 var offset = 0;
-                for(i in d){
+                for (i in d) {
                     let dto = d[i];
 
                     let found = false;
-                    $('.street').each(function() {
-                        if($(this).attr('street_id') == dto.id) {
+                    $('.street').each(function () {
+                        if ($(this).attr('street_id') == dto.id) {
                             found = true;
                         }
                     });
 
-                    if(!found) {
+                    if (!found) {
                         if (j === 4) {
                             j = 0;
                             z++;
                         }
-                        if(z % 2 === 0) {
+                        if (z % 2 === 0) {
                             offset = gridSnapX;
                         } else {
                             offset = 0;
@@ -221,7 +229,7 @@ $( document ).ready(function() {
                 }
                 hideLoader();
             },
-            error: function() {
+            error: function () {
                 hideLoader();
                 showError("Something went wrong!");
             },
@@ -233,11 +241,12 @@ $( document ).ready(function() {
     if (ids) {
         search.val(ids);
         searchStreets();
-        var newUrl = location.protocol + '//' + location.host + location.pathname;
+        var newUrl = location.protocol + '//' + location.host
+            + location.pathname;
         window.history.replaceState('', '', newUrl);
     }
 
-    $('#builder_search').click(function() {
+    $('#builder_search').click(function () {
         searchStreets();
     });
 
@@ -253,15 +262,15 @@ $( document ).ready(function() {
     });
 
     let city_name = $('#builder_modal_city_name');
-    city_name.on('input',function(e){
+    city_name.on('input', function (e) {
         let val = city_name.val();
         val = val.replaceAll('.', '');
         city_name.val(val);
     })
 
-    $('#builder_modal_save').click(function() {
+    $('#builder_modal_save').click(function () {
         let name = city_name.val();
-        if(name.indexOf('http') >= 0 || name.indexOf('www.') >= 0) {
+        if (name.indexOf('http') >= 0 || name.indexOf('www.') >= 0) {
             showError("Name can not contain URL!");
             return;
         }
@@ -274,15 +283,15 @@ $( document ).ready(function() {
             streets: []
         }
 
-        $('.street').each(function() {
+        $('.street').each(function () {
             let street = $(this);
             let x;
             let y;
 
             let id = street.attr('street_city_id');
             let street_id = street.attr('street_id');
-            $('.draggable').each(function() {
-                if ($(this).attr("street_id") == street_id){
+            $('.draggable').each(function () {
+                if ($(this).attr("street_id") == street_id) {
                     x = $(this).attr('data-x');
                     y = $(this).attr('data-y');
                 }
@@ -302,14 +311,15 @@ $( document ).ready(function() {
             url: '/city',
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
-            success: function(d) {
+            success: function (d) {
                 loadById(d.id);
                 let newUrl = setUrlParameter(window.location.href, "id", d.id);
                 window.history.replaceState('', '', newUrl);
                 hideLoader();
-                showInfo('Your city was saved!<br/>You can use this link to edit only!<br/>If you want to share, use <i>Copy public link</i>');
+                showInfo(
+                    'Your city was saved!<br/>You can use this link to edit only!<br/>If you want to share, use <i>Copy public link</i>');
             },
-            error: function(err) {
+            error: function (err) {
                 hideLoader();
                 showError("Something went wrong!");
             },
@@ -317,36 +327,36 @@ $( document ).ready(function() {
         });
     });
 
-    if(!shareId) {
+    if (!shareId) {
         interact('.draggable')
-            .draggable({
-                inertia: true,
-                modifiers: [
-                    interact.modifiers.restrictRect({
-                        endOnly: true
-                    }),
-                    interact.modifiers.snap({
-                        targets: [
-                            interact.snappers.grid({x: gridSnapX, y: gridSnapY})
-                        ],
-                        range: Infinity,
-                        relativePoints: [{x: 0.5, y: 1}]
-                    }),
-                ],
+        .draggable({
+            inertia: true,
+            modifiers: [
+                interact.modifiers.restrictRect({
+                    endOnly: true
+                }),
+                interact.modifiers.snap({
+                    targets: [
+                        interact.snappers.grid({x: gridSnapX, y: gridSnapY})
+                    ],
+                    range: Infinity,
+                    relativePoints: [{x: 0.5, y: 1}]
+                }),
+            ],
 
-                autoScroll: true,
+            autoScroll: true,
 
-                listeners: {
-                    move: dragMoveListener,
-                }
-            })
+            listeners: {
+                move: dragMoveListener,
+            }
+        })
     }
 
-    let round = function(num) {
+    let round = function (num) {
         return Math.round(num * 10) / 10;
     }
 
-    function dragMoveListener (event) {
+    function dragMoveListener(event) {
         var target = event.target
 
         let dx = event.dx;
@@ -365,18 +375,19 @@ $( document ).ready(function() {
         let x = round((parseFloat(target.getAttribute('data-x')) || 0) + dx);
         let y = round((parseFloat(target.getAttribute('data-y')) || 0) + dy);
 
-        target.style.transform = 'translate(' + x + 'px, ' + y + 'px) rotateX(55deg) rotateZ(45deg)'
+        target.style.transform = 'translate(' + x + 'px, ' + y
+            + 'px) rotateX(55deg) rotateZ(45deg)'
 
         var street_id = target.getAttribute('street_id');
         var street;
         var loading;
-        $('.street').each(function() {
-            if ($(this).attr("street_id") == street_id){
+        $('.street').each(function () {
+            if ($(this).attr("street_id") == street_id) {
                 street = $(this);
             }
         });
-        $('.loading').each(function() {
-            if ($(this).attr("street_id") == street_id){
+        $('.loading').each(function () {
+            if ($(this).attr("street_id") == street_id) {
                 loading = $(this);
             }
         })
@@ -389,7 +400,8 @@ $( document ).ready(function() {
         validateStreets();
 
         if (loading) {
-            loading.css('transform', 'translate(' + x + 'px, ' + y + 'px) rotateX(55deg) rotateZ(45deg)');
+            loading.css('transform', 'translate(' + x + 'px, ' + y
+                + 'px) rotateX(55deg) rotateZ(45deg)');
         }
 
         target.setAttribute('data-x', x)

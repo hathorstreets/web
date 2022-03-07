@@ -63,7 +63,7 @@ public class StreetController {
 
    @GetMapping("/street/sold")
    public SoldCountDto soldCount() {
-      int soldCount = streetService.getSoldCount();
-      return new SoldCountDto(soldCount);
+      SoldCountDto soldCount = streetService.getSoldCount();
+      return soldCount;
    }
 }

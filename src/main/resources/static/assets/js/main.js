@@ -4,6 +4,7 @@ $( document ).ready(function() {
     let email = $('#email');
     let count = $('#count');
     let freeCounter = $('.free_counter');
+    let totalCounter = $('#burned_counter');
     let cityDiv = $('#cities');
     let progress = $('#progress');
 
@@ -14,8 +15,9 @@ $( document ).ready(function() {
             url: '/street/sold',
             type: 'GET',
             success: function(soldCount){
-                freeCounter.html((11111 - soldCount.count));
-                progress.val(parseInt((soldCount.count / 11111) * 100))
+                freeCounter.html(soldCount.freeCount);
+                totalCounter.html((11111 - soldCount.burnedCount) + ' (' + soldCount.burnedCount + ' burned)')
+                progress.val(parseInt((soldCount.count / (11111 - soldCount.burnedCount)) * 100))
             }
         });
     };

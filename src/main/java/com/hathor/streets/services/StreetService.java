@@ -1,5 +1,6 @@
 package com.hathor.streets.services;
 
+import com.hathor.streets.controllers.dto.SoldCountDto;
 import com.hathor.streets.data.entities.Street;
 import com.hathor.streets.data.repositories.StreetRepository;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,10 @@ public class StreetService {
       return streets;
    }
 
-   public int getSoldCount() {
-      int soldCount = streetRepository.countByTaken(true);
-      return soldCount;
+   public SoldCountDto getSoldCount() {
+      int burnedCount = streetRepository.countByBurned(true);
+      int notFreeCount = streetRepository.countByBurnedOrTaken(true, true);
+      int freeCount = streetRepository.countByBurnedAndTaken(false, false);
+      return new SoldCountDto(notFreeCount, freeCount, burnedCount);
    }
 }

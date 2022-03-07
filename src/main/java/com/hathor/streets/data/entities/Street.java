@@ -16,6 +16,8 @@ public class Street {
    @Column(unique = true)
    private String token;
 
+   private boolean burned;
+
    private boolean taken;
 
    @ManyToOne
@@ -79,5 +81,13 @@ public class Street {
 
    public void setStreetAttributes(StreetAttributes streetAttributes) {
       this.streetAttributes = streetAttributes;
+   }
+
+   public boolean isBurned() {
+      return burned;
+   }
+
+   public void setBurned(boolean burned) {
+      this.burned = burned;
    }
 }

@@ -48,7 +48,7 @@ $( document ).ready(function() {
                     qrcode.append(qrWrapper);
                     let qr = $('<div class="QrCode" id="' + id + '">');
                     qrWrapper.append(qr);
-                    let paymentRequest = '{"address":"hathor:' + cityNft.depositAddress + '","amount":1,"token":{"name":"' + street.name + '","symbol":"' + street.tokenSymbol + '","uid":"' + street.token + '"}}';
+                    let paymentRequest = '{"address":"hathor:' + cityNft.depositAddress + '","amount":1,"token":{"name":"' + street.tokenSymbol + '","symbol":"' + street.tokenSymbol + '","uid":"' + street.token + '"}}';
                     new QRCode(document.getElementById(id), paymentRequest);
                 }
                 streets.html(symbols.join(', '));
@@ -62,7 +62,7 @@ $( document ).ready(function() {
             nftSection.hide();
             sendBackSection.hide();
         }
-        else if (cityNft.state === 3) { //NFT_SENT
+        else if (cityNft.state === 3 || cityNft.state === 6) { //NFT_SENT
             sendSection.hide();
             depositSection.hide();
             nftSection.show();
