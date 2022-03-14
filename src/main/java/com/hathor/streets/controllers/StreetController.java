@@ -1,11 +1,13 @@
 package com.hathor.streets.controllers;
 
+import com.google.gson.Gson;
 import com.hathor.streets.controllers.dto.DtoConverter;
 import com.hathor.streets.controllers.dto.SoldCountDto;
 import com.hathor.streets.controllers.dto.StreetDto;
 import com.hathor.streets.data.entities.Street;
 import com.hathor.streets.services.RarityProvider;
 import com.hathor.streets.services.StreetService;
+import java.util.Map;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class StreetController {
 
    private final StreetService streetService;
    private final RarityProvider rarityProvider;
+   private final Gson gson = new Gson();
 
    public StreetController(StreetService streetService, RarityProvider rarityProvider) {
       this.streetService = streetService;
@@ -65,5 +68,13 @@ public class StreetController {
    public SoldCountDto soldCount() {
       SoldCountDto soldCount = streetService.getSoldCount();
       return soldCount;
+   }
+
+   @GetMapping("/rarity")
+   public String rarity() {
+      Map<String, Map<String, Integer>> rarityMap = streetService.getRarity();
+
+      String result = gson.toJson(rarityMap);
+      return result;
    }
 }

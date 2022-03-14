@@ -17,4 +17,6 @@ public interface StreetRepository extends CrudRepository<Street, Integer> {
    int countByBurnedAndTaken(boolean burned, boolean taken);
 
    List<Street> findByMintUserAddress(String address);
+
+   List<Street> findByBurnedIsFalse();
 }
